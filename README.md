@@ -16,3 +16,6 @@
 ✨[Typescript :기초부터 실전형 프로젝트까지 with React + NodeJS](https://www.udemy.com/course/best-typescript-21/)<br/>
 ✨✨[캡틴 판교](https://joshua1988.github.io/ts/)<br/>
 ✨✨✨[타입스크립트 공홈](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html)<br/>
+
+근데 솔직히..
+공식홈페이지로 빠르게 훑어서 개념을 배우고 [이곳](https://bigfrontend.dev/)에서 타입스크립트 문제를 풀어나가는게 더 실력향상에 좋은것 같습니다.
