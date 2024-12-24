@@ -40,3 +40,44 @@ type Result = ReturnTypeOf<() => string>; // string
 type Result = ReturnTypeOf<(a: string) => boolean>; // never
 type Result = ReturnTypeOf<number>; // never
 ```
+
+# 템플릿 리터럴 타입에서의 패턴 매칭
+
+> 기본 패턴
+
+```js
+// 첫 글자 가져오기
+type FirstChar<T extends string> = T extends `${infer F}${infer R}` ? F : never;
+
+// 예시:
+type A = FirstChar<'BFE'> // 'B'
+type B = FirstChar<'dev'> // 'd'
+type C = FirstChar<''> // never
+```
+
+> 패턴 매칭의 동작 방식
+<br/>
+
+TypeScript는 패턴 매칭 시 반환하는 값에 따라 다르게 동작함!
+
+
+```js
+// 마지막 글자 가져오기
+type GetLast<T extends string> = T extends `${infer R}${infer L}` ? L : never;
+// 'Hello' -> R='Hell', L='o'
+
+// 첫 글자 가져오기
+type GetFirst<T extends string> = T extends `${infer R}${infer L}` ? R : never;
+// 'Hello' -> R='H', L='ello'
+
+```
+
+- 조건문의 반환값(? L vs ? R)에 따라 패턴 매칭 방식이 달라진다.
+- L을 반환할 때는 `R`이 탐욕적으로 매칭됨
+- R을 반환할 때는 `R`이 최소한으로 매칭됨
+
+<br/>
+
+여기서 `탐욕적`이라는것은 최대한 많이 값을 가져간다로 이해하면 된다.<br/>
+위의 예제 중 마지막 글자 가져오기에서 조건문의 반환타입이 마지막 infer인 `L` 이였는데, 이때는 앞에 infer R이 최대한의 값을 많이 가져가고,<br/>
+첫 글자 가져오기에서 조건문의 반환타입이 첫번째인 R로 되어있다. 이때는 뒤에있는 infer L이 나머지들을 탐욕적이게 가져가고 R이 첫번째 글자 하나만 가져가게된다.
