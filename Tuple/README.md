@@ -6,7 +6,7 @@
 const person = {
   name: 'Test',
   age: 30,
-  role: [2, 'author'], // role:(string|number)[] 로 타입 추론이 되어있는 상태다.
+  role: [2, 'author'], // role:(number|string)[] 로 타입 추론이 되어있는 상태다.
 };
 
 person.role.push('admin');
